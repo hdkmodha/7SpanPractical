@@ -88,7 +88,7 @@ struct CountingStyle: LabelStyle {
                 .padding(.horizontal, 4)
                 .background(.background.secondary, in: .rect(cornerRadius: 4))
         }
-        .padding(.vertical, 2)
+        .padding(.vertical, 8)
         .padding(.horizontal, 8)
         .background(.background.secondary, in: .rect(cornerRadius: 8))
     }

@@ -1,5 +1,5 @@
 {
-  "originHash" : "8823f42c121e2bd59c7065deafaa6b94a0ad3634a0538fbca4b0a4fb79b4fb03",
+  "originHash" : "8ff89a0c94cc57415dec1b691c7060ce232d0698d1ee8d3f83732972e2a3f264",
   "pins" : [
     {
       "identity" : "combine-schedulers",
@@ -8,6 +8,15 @@
       "state" : {
         "revision" : "9fa31f4403da54855f1e2aeaeff478f4f0e40b13",
         "version" : "1.0.2"
+      }
+    },
+    {
+      "identity" : "persistencestorage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/hdkmodha/PersistenceStorage",
+      "state" : {
+        "revision" : "8100aa96788c17a517447b059c98ebac297ac3a0",
+        "version" : "1.0.1"
       }
     },
     {

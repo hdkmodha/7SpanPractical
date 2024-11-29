@@ -12,24 +12,21 @@ struct LoginView: View {
     @ScaledMetric(relativeTo: .title2) var imageSize = 24
     
     var body: some View {
-        VStack {
+        VStack(spacing: 16) {
+            
+            Image(.github)
+                .resizable()
+                .frame(width: 100, height: 100)
+                .foregroundStyle(.purple)
+            
             Button {
                 viewModel.send(.loginButtonTapped)
             } label: {
                 HStack {
+                    Text("Login with Github")
                     if viewModel.loginState.isFetching {
                         ProgressView()
                     }
-                    Label {
-                        Text("Login with Github")
-                    } icon: {
-                        Image(.github)
-                            .renderingMode(.template)
-                            .resizable()
-                            .aspectRatio(1, contentMode: .fit)
-                            .frame(width: imageSize)
-                    }
-                    .font(.title2)
                     if viewModel.loginState.error != nil {
                         Image(systemName: "exclamationmark.triangle.fill")
                             .foregroundStyle(.yellow)

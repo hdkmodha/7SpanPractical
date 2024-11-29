@@ -24,3 +24,15 @@ struct Repository: Identifiable, Codable, Hashable, Sendable {
         case updatedAt = "updated_at"
     }
 }
+
+extension Repository {
+    var lastUpdatedDate: String {
+        let formatter = ISO8601DateFormatter()
+        if let date = formatter.date(from: self.updatedAt) {
+            let displayFormatter = DateFormatter()
+            displayFormatter.dateStyle = .medium
+            return displayFormatter.string(from: date)
+        }
+        return "Unknown"
+    }
+}

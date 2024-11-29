@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C6243CC12CF986BD0085EF6B /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = C6243CC02CF986BD0085EF6B /* Dependencies */; };
+		C6243D202CF9CAB70085EF6B /* PersistenceStorage in Frameworks */ = {isa = PBXBuildFile; productRef = C6243D1F2CF9CAB70085EF6B /* PersistenceStorage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6243D202CF9CAB70085EF6B /* PersistenceStorage in Frameworks */,
 				C6243CC12CF986BD0085EF6B /* Dependencies in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -71,6 +73,7 @@
 			name = 7SpanPractical;
 			packageProductDependencies = (
 				C6243CC02CF986BD0085EF6B /* Dependencies */,
+				C6243D1F2CF9CAB70085EF6B /* PersistenceStorage */,
 			);
 			productName = 7SpanPractical;
 			productReference = C624F7FA2CF8C1C100892C1A /* 7SpanPractical.app */;
@@ -102,6 +105,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				C6243CBF2CF986BD0085EF6B /* XCRemoteSwiftPackageReference "swift-dependencies" */,
+				C6243D1E2CF9CAB70085EF6B /* XCRemoteSwiftPackageReference "PersistenceStorage" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = C624F7FB2CF8C1C100892C1A /* Products */;
@@ -353,6 +357,14 @@
 				minimumVersion = 1.6.1;
 			};
 		};
+		C6243D1E2CF9CAB70085EF6B /* XCRemoteSwiftPackageReference "PersistenceStorage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hdkmodha/PersistenceStorage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -360,6 +372,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C6243CBF2CF986BD0085EF6B /* XCRemoteSwiftPackageReference "swift-dependencies" */;
 			productName = Dependencies;
+		};
+		C6243D1F2CF9CAB70085EF6B /* PersistenceStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C6243D1E2CF9CAB70085EF6B /* XCRemoteSwiftPackageReference "PersistenceStorage" */;
+			productName = PersistenceStorage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

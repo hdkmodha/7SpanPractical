@@ -20,16 +20,36 @@ final class NetworkManager {
     
     func authenticate() {
         let clientID = secrets.clientId
-        guard let url = URL(string: "https://github.com/login/oauth/authorize?client_id=\(clientID)&scope=read:user") else { return }
+        guard let url = URL(string: "\(AppConstants.authAPI)?client_id=\(clientID)&scope=read:user") else { return }
         DispatchQueue.main.async {
             UIApplication.shared.open(url)
         }
     }
     
-    func fetch<T: Codable>() async throws -> [T] {
-        let url = URL(string: "https://api.github.com/")!
-        _ = try await URLSession.shared.data(from: url)
-        fatalError()
+    func fetch<T: Codable>(withCurrentPage page: Int, perPage: Int, type: T.Type) async throws -> [T] {
+        let repoAPI = "\(AppConstants.repoAPI)?type=owner&per_page=\(perPage)&page=\(page)"
+        
+        guard let url = URL(string: repoAPI) else {
+            fatalError("Invalid URL")
+        }
+        
+        guard let token = UserDefaults.standard.string(forKey: "token") else {
+            fatalError("Provide token")
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("token \(token)", forHTTPHeaderField: "Authorization")
+        
+        do {
+            let (data, _) = try await URLSession.shared.data(for: request)
+            let repos = try JSONDecoder().decode([T].self, from: data)
+            return repos
+        } catch {
+            print(error.localizedDescription)
+            return []
+        }
+        
     }
     
     func handleCallback(url: URL) async throws -> Result<String, Error> {

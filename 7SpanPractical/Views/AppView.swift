@@ -9,11 +9,27 @@ import Foundation
 import SwiftUI
 
 struct AppView: View {
+    
+    let viewModel: AppViewModel
+    
     var body: some View {
-        LoginView()
+        Group {
+            switch viewModel.rootScreen {
+            case .login:
+                LoginView()
+            case .repository:
+                NavigationStack {
+                    RepositoryListView()
+                        .navigationTitle("Repositories")
+                }
+            }
+        }
+        .onAppear {
+            viewModel.send(.onAppear)
+        }
     }
 }
 
 #Preview {
-    AppView()
+    AppView(viewModel: .init())
 }

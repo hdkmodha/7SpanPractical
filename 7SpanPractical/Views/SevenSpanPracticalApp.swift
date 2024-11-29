@@ -6,19 +6,18 @@
 //
 
 import SwiftUI
+import PersistenceStorage
 
 @main
 struct SevenSpanPracticalApp: App {
     
-    init() {
+    init () {
+        PersistenceStorage.shared.setupDataBase(withName: AppConstants.dbName)
     }
     
     var body: some Scene {
         WindowGroup {
-            AppView()
-                .onOpenURL { url in
-                    print(url)
-                }
+            AppView(viewModel: .init())
         }
     }
 }

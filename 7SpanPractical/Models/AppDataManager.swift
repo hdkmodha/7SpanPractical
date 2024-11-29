@@ -5,9 +5,8 @@
 //  Created by Hardik Modha on 29/11/24.
 //
 
+import Dependencies
 import Foundation
-
-
 
 final class AppDataManager {
     private var networkManager: NetworkManager
@@ -18,13 +17,30 @@ final class AppDataManager {
         self.persistanceManager = persistanceManager
     }
     
-    func repositories() async throws -> [Repository] {
-        if let repos: [Repository] = persistanceManager.query() {
-            return repos
-        } else {
-            let repos: [Repository] = try await networkManager.fetch()
-            try persistanceManager.save(repos)
+    func repositories(currentPage: Int, pageSize: Int, refresh: Bool = false) async throws -> [Repository] {
+        let existing = persistanceManager.fetch()
+        guard !existing.isEmpty /*|| refresh == false*/ else {
+            let repos = try await networkManager.fetch(
+                withCurrentPage: currentPage,
+                perPage: pageSize,
+                type: Repository.self
+            )
+            persistanceManager.savetoDatabase(withRespositories: repos)
             return repos
         }
+        return existing
+    }
+}
+
+extension AppDataManager: DependencyKey {
+    static var liveValue: AppDataManager {
+        .init(networkManager: .init(), persistanceManager: .init())
+    }
+}
+
+extension DependencyValues {
+    var appManager: AppDataManager {
+        get { self[AppDataManager.self] }
+        set { self[AppDataManager.self] = newValue }
     }
 }

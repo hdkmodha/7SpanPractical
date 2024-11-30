@@ -1,4 +1,5 @@
 import UIKit
+import PlaygroundSupport
 
 var greeting = "Hello, playground"
 
@@ -13,7 +14,7 @@ func fetchMessage(withCompletion completion: @escaping @Sendable (String) -> Voi
     let timeOut = DispatchTime.now() + 2
     
     group.enter()
-    fetchMessage { message in
+    fetchMessageOne { message in
         if DispatchTime.now() > timeOut {
             isTimeOut = true
         } else {
@@ -34,7 +35,7 @@ func fetchMessage(withCompletion completion: @escaping @Sendable (String) -> Voi
     
     group.notify(queue: queue) {
         let result: String
-        
+        print("Group Notified")
         if isTimeOut {
             result = "Unable to load message: Time out exceeded"
         } else if let messageOne = firstMessage, let messageSecond = secondMessage {
@@ -48,25 +49,35 @@ func fetchMessage(withCompletion completion: @escaping @Sendable (String) -> Voi
         }
     }
     
-    queue.asyncAfter(deadline: timeOut) {
-        group.notify(queue: .main) { [isTimeOut] in
-            if isTimeOut {
-                completion("Unable to load message - Time out exceeded")
-            }
-        }
-    }
+    group.wait(timeout: timeOut)
+    
+//    queue.asyncAfter(deadline: timeOut) {
+//        group.notify(queue: .main) { [isTimeOut] in
+//            if isTimeOut {
+//                completion("Unable to load message - Time out exceeded")
+//            }
+//        }
+//    }
 }
 
 func fetchMessageOne(withCompletion completion: @escaping @Sendable (String) -> Void) {
-    completion("Hello")
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        completion("Hello")
+    }
 }
 
 func fetchMessageTwo(withCompletion completion: @escaping @Sendable (String) -> Void) {
-    completion("World")
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        completion("World")
+    }
 }
 
 DispatchQueue.main.async {
+    print("Fetching Messages")
     fetchMessage { message in
         print(message)
     }
 }
+
+PlaygroundPage.current.needsIndefiniteExecution = true
+

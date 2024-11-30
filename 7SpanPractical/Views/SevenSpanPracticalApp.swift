@@ -13,6 +13,7 @@ struct SevenSpanPracticalApp: App {
     
     init () {
         PersistenceStorage.shared.setupDataBase(withName: AppConstants.dbName)
+        print("DatabasePath: \(PersistenceStorage.shared.dabasePath)")
     }
     
     var body: some Scene {

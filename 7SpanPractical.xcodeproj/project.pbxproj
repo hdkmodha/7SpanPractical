@@ -13,6 +13,7 @@
 
 /* Begin PBXFileReference section */
 		C624F7FA2CF8C1C100892C1A /* 7SpanPractical.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 7SpanPractical.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6CDEFB22CFA2332003849E4 /* ConcurrencyTask.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = ConcurrencyTask.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -39,6 +40,7 @@
 		C624F7F12CF8C1C100892C1A = {
 			isa = PBXGroup;
 			children = (
+				C6CDEFB22CFA2332003849E4 /* ConcurrencyTask.playground */,
 				C624F7FC2CF8C1C100892C1A /* 7SpanPractical */,
 				C624F7FB2CF8C1C100892C1A /* Products */,
 			);
